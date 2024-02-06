@@ -1,7 +1,7 @@
 <b>Deploiement serveur pour l'internet des objets industriels</b>
 
-proxy.sh script de parametrage du proxy (optionnel à exécuter avant le script d'installation si votre serveur est derrière un proxy)
-config.sh script d'installation des services
+<p>proxy.sh script de parametrage du proxy (optionnel à exécuter avant le script d'installation si votre serveur est derrière un proxy)</p>
+<p></p>install.sh script d'installation des services</p>
 
 <b>Prérequis:</b>
 - raspberry pi os lite (64bits)
