@@ -26,12 +26,12 @@ touch flag.docker
 fi
 
 #paramétrage proxy docker
-if [ -f "/home/pi/http-proxy.conf" -a ! -f "flag.proxy" ]
+if [ -f "$HOME/http-proxy.conf" -a ! -f "flag.proxy" ]
 then
 echo
 echo "parametrage du proxy pour docker"
 sudo mkdir /etc/systemd/system/docker.service.d
-sudo cp /home/pi/http-proxy.conf /etc/systemd/system/docker.service.d/http-proxy.conf
+sudo cp $HOME/http-proxy.conf /etc/systemd/system/docker.service.d/http-proxy.conf
 echo 
 echo "patientez pendant le redemarrage du service docker"
 sudo systemctl daemon-reload
@@ -59,9 +59,9 @@ sudo docker volume create nodered_data
 sudo docker run -d -p 1880:1880 --name nodered --restart=always -v nodered_data:/data  nodered/node-red:3.1
 
 #set registry proxy
-if [ -f "/home/pi/http-proxy.conf" -a ! -f "flag.proxy" ]
+if [ -f "$HOME/http-proxy.conf" -a ! -f "flag.proxy" ]
 then
-read line < /home/pi/npm-proxy.conf
+read line < $HOME/npm-proxy.conf
 sudo docker exec nodered /bin/sh -c "npm config set proxy $line"
 sudo docker exec nodered /bin/sh -c "npm config set https-proxy $line"
 touch flag.proxy
