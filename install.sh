@@ -99,9 +99,6 @@ if [ ! -f "flag.influxdb" ]
 then
 sudo docker volume create influxdb_data
 sudo docker run -d -p 8086:8086 --name influxdb --restart=always -v influxdb_data:/var/lib/influxdb  influxdb:1.8
-#creation base demo
-sudo docker exec influxdb influx -execute 'create database demo;'
-sudo docker exec influxdb influx -execute 'CREATE RETENTION POLICY "retention_1d" ON "demo" DURATION 1d REPLICATION 1 default;'
 touch flag.influxdb
 fi
 
@@ -111,4 +108,12 @@ if [ ! -f "flag.broker" ]
 then
 sudo docker run -d -p 1883:1883 --name brokerMqtt --restart=always  eclipse-mosquitto:1.6.14
 touch flag.broker
+fi
+
+if [ ! -f "flag.demo" ]
+then
+#creation base demo
+sudo docker exec influxdb influx -execute 'create database demo;'
+sudo docker exec influxdb influx -execute 'CREATE RETENTION POLICY "retention_1d" ON "demo" DURATION 1d REPLICATION 1 default;'
+touch flag.demo
 fi
